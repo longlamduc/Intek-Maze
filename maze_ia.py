@@ -12,7 +12,7 @@ def load_maze():
         if 'A' in line:
             start = x * 10 + line.index('A')
         maze.append(line)
-    return maze
+    return start
 
 
 def bfs(maze, start, goal): #start is number and goal is character
