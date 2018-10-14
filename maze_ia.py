@@ -1,90 +1,71 @@
 #!/usr/bin/env python
 import sys
 maze = []
-start = 0
 def load_maze():
-    del maze[:]
-    x = 0
-    wall = sys.stdin.readline()
-    maze.append(wall)
-    line = ""
-    while line != wall:
-        x += 1
-        line = sys.stdin.readline()
-        if 'A' in line:
-            start = x * 10 + line.index('A')
-        maze.append(line)
-    return start
+    line = sys.stdin.readline()
+    maze = []
+    if 'MAZE' in line:
+        while len(line) > 0:
+            line = sys.stdin.readline().strip()
+            maze.append(list(line))
+
 
 
 def bfs(maze, start, goal): #start is number and goal is character
     queue = [] # place to hold the point for checking
-    check = [] # mark if the point is checked
     before = {} # hold the position of the previous point
     way = [] # give exactly the way from the start point to the goal point
-    x = start /10
-    y = start % 10
-    for i in range(len(maze)): #fullfill the check array with 0 means that
-        check.append([])# there is no check_ed point
-        for j in range(len(maze[i])):
-            check[i].append(0)
-    check[x][y] = 1
+    x = start[0]
+    y = start[1]
+    check = [(x, y)]
     while maze[x][y] != goal:
-        if maze[x - 1][y] != '#' and check[x - 1][y] == 0: #top
-            check[x - 1][y] = 1
-            before[(x - 1) * 10 + y] = x * 10 + y
-            queue.append((x-1) * 10 + y)
-        if maze[x][y + 1] != '#' and check[x][y + 1] == 0: #right
-            check[x][y + 1] = 1
-            before[(x) * 10 + y + 1] = x * 10 + y
-            queue.append((x) * 10 + y + 1)
-        if maze[x + 1][y] != '#' and check[x + 1][y] == 0: #bottom
-            check[x + 1][y] = 1
-            before[(x + 1) * 10 + y] = x * 10 + y
-            queue.append((x+1) * 10 + y)
-        if maze[x][y - 1] != '#' and check[x][y - 1] == 0: #left
-            check[x][y - 1] = 1
-            before[(x) * 10 + y - 1] = x * 10 + y
-            queue.append((x) * 10 + y - 1)
-        x = int(queue[0] / 10)
-        y = queue[0] % 10
+        for x2, y2 in ((x+1,y), (x-1,y), (x,y+1), (x,y-1)):
+            if maze[x2][y2] != '#' and (x2, y2) not in check:
+                before[(x2, y2)] = [x, y]
+                queue.append([x2, y2])
+                check.append((x2, y2))
+        x = queue[0][0]
+        y = queue[0][1]
         queue.pop(0)
-    way.append(x * 10 + y)
-    while (x * 10 + y) != start:
-        t = before[x * 10 + y]
+    way.append([x, y])
+    t = []
+    while (x, y) != start:
+        t = before[(x, y)]
         way.append(t)
-        x = (int)(t / 10)
-        y = t % 10
+        x = t[0]
+        y = t[1]
     return way #guide to go from start to goal step by step
 
 
 def move(way):
-    x = int(way[len(way) - 1] / 10)
-    y = way[len(way) - 1] % 10
-    for i in reversed(range(len(way))):
-        if (int(way[i] / 10)) - x == 1:
-            sys.stdout.write("MOVE DOWN\n")
-        elif x - int(way[i] / 10) == 1:
-            sys.stdout.write("MOVE UP\n")
-        elif way[i] % 10 - y == 1:
-            sys.stdout.write("MOVE RIGHT\n")
+    x = way[len(way) - 1][0]
+    y = way[len(way) - 1][1]
+    for i in reversed(range(len(way)) - 1):
+        x = way[i + 1][0]
+        y = way[i + 1][1]
+        if way[i][0] - x == 1:
+            sys.stdout.write("MOVE DOWN\n\n")
+        elif way[i][0] == 1:
+            sys.stdout.write("MOVE UP\n\n")
+        elif way[i][i] - y == 1:
+            sys.stdout.write("MOVE RIGHT\n\n")
         else:
-            sys.stdout.write("MOVE LEFT\n")
-
-
+            sys.stdout.write("MOVE LEFT\n\nS")
 
 
 sys.stdout.write("I AM IA\n\n")
 sys.stdout.write("OK\n\n")
-start = load_maze()
-sys.stdout.write("MOVE LEFT\n\n")
-# for i in range(1000):
-#     maze = load_maze()
-#     way = bfs(maze, start, '!')
-#     if len(way) > 0 and len(way) < 20:
-#         move(way)
-#         start = way[0]
-#     else:
-#         way = bfs(maze, start, 'o')
-#         move(way)
-#         start = way[0]
+load_maze()
+start = []
+for x in range(len(maze)):
+    for y in range(len(maze[x])):
+        if maze[x][y] == 'A':
+            start = [x, y]
+# for i in range(999):
+#     load_maze()
+#     # way = bfs(maze, start, '!')
+#     # if len(way) > 0 and len(way) < 20:
+#     #     move(way)
+#     # else:
+way = bfs(maze, start, 'o')
+move(way)
