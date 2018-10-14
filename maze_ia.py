@@ -57,13 +57,13 @@ def move(way):
     y = way[len(way) - 1] % 10
     for i in reversed(range(len(way))):
         if (int(way[i] / 10)) - x == 1:
-            print("MOVE DOWN\n\n")
+            print("MOVE DOWN\n")
         elif x - int(way[i] / 10) == 1:
-            print("MOVE UP\n\n")
+            print("MOVE UP\n")
         elif way[i] % 10 - y == 1:
-            print("MOVE RIGHT\n\n")
+            print("MOVE RIGHT\n")
         else:
-            print("MOVE LEFT\n\n")
+            print("MOVE LEFT\n")
 
 
 
@@ -76,7 +76,7 @@ for i in maze:
         if maze[i][j] != '#' and maze[i][j] != ' ':
             if maze[i][j] != 'o' and maze[i][j] != '!':
                 start = i * 10 + j
-while sys.stdin.readline() != '':
+for i in range(1000):
     maze = load_maze()
     way = bfs(maze, start, '!')
     if len(way) > 0 and len(way) < 20:
