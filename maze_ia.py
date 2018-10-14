@@ -57,32 +57,34 @@ def move(way):
     y = way[len(way) - 1] % 10
     for i in reversed(range(len(way))):
         if (int(way[i] / 10)) - x == 1:
-            print("MOVE DOWN\n")
+            sys.stdout.write("MOVE DOWN\n")
         elif x - int(way[i] / 10) == 1:
-            print("MOVE UP\n")
+            sys.stdout.write("MOVE UP\n")
         elif way[i] % 10 - y == 1:
-            print("MOVE RIGHT\n")
+            sys.stdout.write("MOVE RIGHT\n")
         else:
-            print("MOVE LEFT\n")
+            sys.stdout.write("MOVE LEFT\n")
 
 
 
 
-print("I AM IA\n")
-print("OK\n")
+sys.stdout.write("I AM IA\n\n")
+sys.stdout.write("OK\n\n")
 maze = load_maze()
 for i in maze:
     for j in maze[i]:
         if maze[i][j] != '#' and maze[i][j] != ' ':
             if maze[i][j] != 'o' and maze[i][j] != '!':
                 start = i * 10 + j
-for i in range(1000):
-    maze = load_maze()
-    way = bfs(maze, start, '!')
-    if len(way) > 0 and len(way) < 20:
-        move(way)
-        start = way[0]
-    else:
-        way = bfs(maze, start, 'o')
-        move(way)
-        start = way[0]
+
+sys.stdout.write("MOVE LEFT\n\n")
+# for i in range(1000):
+#     maze = load_maze()
+#     way = bfs(maze, start, '!')
+#     if len(way) > 0 and len(way) < 20:
+#         move(way)
+#         start = way[0]
+#     else:
+#         way = bfs(maze, start, 'o')
+#         move(way)
+#         start = way[0]
