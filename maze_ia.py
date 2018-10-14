@@ -1,13 +1,16 @@
 #!/usr/bin/env python
 import sys
-maze = []
 def load_maze():
     line = sys.stdin.readline()
     maze = []
+    f = open("haha","a")
     if 'MAZE' in line:
         while len(line) > 0:
             line = sys.stdin.readline().strip()
             maze.append(list(line))
+    f.write(str(maze))
+    f.close()
+    return maze
 
 
 
@@ -52,15 +55,23 @@ def move(way):
         else:
             sys.stdout.write("MOVE LEFT\n\nS")
 
-
+sys.stdin.readline()
 sys.stdout.write("I AM IA\n\n")
+sys.stdin.readline()
+sys.stdin.readline()
 sys.stdout.write("OK\n\n")
-load_maze()
+sys.stdin.readline()
+maze = []
+maze = load_maze()
+f = open('maze_map', 'a')
+f.write(str(maze) + '\n')
+f.close()
 start = []
 for x in range(len(maze)):
     for y in range(len(maze[x])):
         if maze[x][y] == 'A':
             start = [x, y]
+
 # for i in range(999):
 #     load_maze()
 #     # way = bfs(maze, start, '!')
