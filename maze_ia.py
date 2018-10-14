@@ -2,11 +2,15 @@
 import sys
 def load_maze():
     maze = []
+    x = 0
     wall = sys.stdin.readline()
     maze.append(wall)
     line = ""
     while line != wall:
+        x += 1
         line = sys.stdin.readline()
+        if 'A' in line:
+            start = x * 10 + line.index('A')
         maze.append(line)
     return maze
 
@@ -70,13 +74,6 @@ def move(way):
 
 sys.stdout.write("I AM IA\n\n")
 sys.stdout.write("OK\n\n")
-# maze = load_maze()
-# for i in maze:
-#     for j in maze[i]:
-#         if maze[i][j] != '#' and maze[i][j] != ' ':
-#             if maze[i][j] != 'o' and maze[i][j] != '!':
-#                 start = i * 10 + j
-
 sys.stdout.write("MOVE LEFT\n\n")
 # for i in range(1000):
 #     maze = load_maze()
