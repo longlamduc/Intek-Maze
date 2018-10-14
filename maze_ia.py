@@ -70,12 +70,12 @@ def move(way):
 
 sys.stdout.write("I AM IA\n\n")
 sys.stdout.write("OK\n\n")
-maze = load_maze()
-for i in maze:
-    for j in maze[i]:
-        if maze[i][j] != '#' and maze[i][j] != ' ':
-            if maze[i][j] != 'o' and maze[i][j] != '!':
-                start = i * 10 + j
+# maze = load_maze()
+# for i in maze:
+#     for j in maze[i]:
+#         if maze[i][j] != '#' and maze[i][j] != ' ':
+#             if maze[i][j] != 'o' and maze[i][j] != '!':
+#                 start = i * 10 + j
 
 sys.stdout.write("MOVE LEFT\n\n")
 # for i in range(1000):
