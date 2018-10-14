@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 import sys
+maze = []
+start = 0
 def load_maze():
-    maze.clear()
+    del maze[:]
     x = 0
     wall = sys.stdin.readline()
     maze.append(wall)
@@ -75,7 +77,6 @@ def move(way):
 sys.stdout.write("I AM IA\n\n")
 sys.stdout.write("OK\n\n")
 start = load_maze()
-maze = []
 sys.stdout.write("MOVE LEFT\n\n")
 # for i in range(1000):
 #     maze = load_maze()
