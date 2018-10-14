@@ -1,8 +1,5 @@
 #!/usr/bin/env python
 import sys
-maze = []
-
-
 def load_maze():
     maze = []
     wall = sys.stdin.readline()
@@ -55,11 +52,37 @@ def bfs(maze, start, goal): #start is number and goal is character
     return way #guide to go from start to goal step by step
 
 
+def move(way):
+    x = int(way[len(way) - 1] / 10)
+    y = way[len(way) - 1] % 10
+    for i in reversed(range(len(way))):
+        if (int(way[i] / 10)) - x == 1:
+            print("MOVE DOWN\n\n")
+        elif x - int(way[i] / 10) == 1:
+            print("MOVE UP\n\n")
+        elif way[i] % 10 - y == 1:
+            print("MOVE RIGHT\n\n")
+        else:
+            print("MOVE LEFT\n\n")
 
 
 
-print("I AM IA\n")
-print("OK\n")
 
-print('MOVE UP\n')
-print(load_maze())
+print("I AM IA\n\n")
+print("OK\n\n")
+maze = load_maze()
+for i in maze:
+    for j in maze[i]:
+        if maze[i][j] != '#' and maze[i][j] != ' ':
+            if maze[i][j] != 'o' and maze[i][j] != '!':
+                start = i * 10 + j
+while True:
+    maze = load_maze()
+    way = bfs(maze, start, '!')
+    if len(way) > 0 and len(way) < 20:
+        move(way)
+        start = way[0]
+    else:
+        way = bfs(maze, start, 'o')
+        move(way)
+        start = way[0]
