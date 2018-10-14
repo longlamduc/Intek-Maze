@@ -68,15 +68,15 @@ def move(way):
 
 
 
-print("I AM IA\n\n")
-print("OK\n\n")
+print("I AM IA\n")
+print("OK\n")
 maze = load_maze()
 for i in maze:
     for j in maze[i]:
         if maze[i][j] != '#' and maze[i][j] != ' ':
             if maze[i][j] != 'o' and maze[i][j] != '!':
                 start = i * 10 + j
-while True:
+while sys.stdin.readline() != '':
     maze = load_maze()
     way = bfs(maze, start, '!')
     if len(way) > 0 and len(way) < 20:
