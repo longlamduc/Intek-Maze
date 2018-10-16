@@ -55,16 +55,17 @@ def main():
     maze = []
     start = []
     way = []
-    line = "a"
+    line = sys.stdin.readline()
     while (line != ''):
-        line = sys.stdin.readline()
         f = open("test1", "a")
         f.write(line)
         f.close()
         if 'HELLO' in line:
             sys.stdout.write("I AM IA\n\n")
+            sys.stdin.readline()
         if 'ARE' in line:
             sys.stdout.write("OK\n\n")
+            sys.stdin.readline()
         if 'MAZE' in line:
             maze = load_maze()
             f = open("test", "w")
@@ -92,4 +93,24 @@ def main():
             f.write(str(way))
             f.close()
             move (way)
+        line = sys.stdin.readline()
+def test():
+    line = sys.stdin.readline()
+    f = open("test_line", "a")
+    f.write(line)
+    f.close
+    if 'HELLO' in line:
+        sys.stdout.write("I AM IA\n\n")
+        sys.stdin.readline()
+    line = sys.stdin.readline()
+    f = open("test_line", "a")
+    f.write(line)
+    f.close
+    if 'ARE' in line:
+        sys.stdout.write("OK\n\n")
+        sys.stdin.readline()
+    line = sys.stdin.readline()
+    f = open("test_line", "a")
+    f.write(line)
+    f.close
 main()
