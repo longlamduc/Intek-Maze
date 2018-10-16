@@ -1,15 +1,11 @@
 #!/usr/bin/env python
 import sys
 def load_maze():
-    line = sys.stdin.readline()
+    line = sys.stdin.readline().strip()
     maze = []
-    if 'MAZE' in line:
-        while len(line) > 0:
-            line = sys.stdin.readline().strip()
-            maze.append(line)
-    f = open("maze_map", "w")
-    f.write(str(maze))
-    f.close()
+    while len(line) > 0:
+        maze.append(line)
+        line = sys.stdin.readline().strip()
     return maze
 
 
@@ -30,9 +26,6 @@ def bfs(maze, start, goal): #start is number and goal is character
         queue.pop(0)
     t = []
     way.append([x,y])
-    # f = open("test", "w")
-    # f.write(str(x) + " " + str(y))
-    # f.close()
     while before[(x,y)] != start:
         way.append(before[(x,y)])
         x = before[(x,y)][0]
@@ -57,25 +50,33 @@ def move(way):
         sys.stdout.write("MOVE LEFT\n\n")
 
 
+
 def main():
-    sys.stdin.readline()
-    sys.stdout.write("I AM IA\n\n")
-    sys.stdin.readline()
-    sys.stdin.readline()
-    sys.stdout.write("OK\n\n")
-    sys.stdin.readline()
     maze = []
     start = []
     way = []
-    for _ in range(1000):
-        maze = load_maze()
-        f = open("test", "a")
-        f.write(str(maze))
+    line = "a"
+    while (line != ''):
+        line = sys.stdin.readline()
+        f = open("test1", "a")
+        f.write(line)
         f.close()
-        for x in range(len(maze)):
-            for y in range(len(maze[x])):
-                if maze[x][y] == 'A':
-                    start = [x, y]
+        if 'HELLO' in line:
+            sys.stdout.write("I AM IA\n\n")
+        if 'ARE' in line:
+            sys.stdout.write("OK\n\n")
+        if 'MAZE' in line:
+            maze = load_maze()
+            f = open("test", "w")
+            f.write(str(maze))
+            f.close()
+            for x in range(len(maze)):
+                for y in range(len(maze[x])):
+                    if maze[x][y] == 'A':
+                        start = [x, y]
+                        f = open("test", "a")
+                        f.write(str(start))
+                        f.close()
                 # f = open("test", "a")
                 # f.write(str(start))
                 # f.close()
@@ -86,6 +87,9 @@ def main():
     # if len(way) > 0 and len(way) < 20:
     #     move(way)
     # else:
-        way = bfs(maze, start, 'o')
-        move (way)
+            way = bfs(maze, start, 'o')
+            f = open("test", "a")
+            f.write(str(way))
+            f.close()
+            move (way)
 main()
