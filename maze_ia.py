@@ -9,7 +9,6 @@ def load_maze():
     return maze
 
 
-
 def bfs(maze, start, goal): #start is number and goal is character
     queue = [] # place to hold the point for checking
     before = {} # hold the position of the previous point
@@ -26,13 +25,26 @@ def bfs(maze, start, goal): #start is number and goal is character
         queue.pop(0)
     t = []
     way.append([x,y])
-    while before[(x,y)] != start:
+    f = open("test1", "a")
+    f.write('\n'+ str(way) + str('\n'))
+    f.write(str(before[(x, y)]) + str('\n'))
+    f.write(str(start))
+    f.write(str(before[(x, y)] != start))
+    f.close()
+    while ([x, y] != start):
         way.append(before[(x,y)])
-        x = before[(x,y)][0]
-        y = before[(x,y)][1]
-        if [x, y] == start:
-            break
-    way.append(before[(x,y)])
+        t = before[(x, y)]
+        x = t[0]
+        y = t[1]
+    f = open("test1", "a")
+    f.write(str(t))
+    f.write(str(x) + '\n' + str(y))
+    f.write(str([x, y] != start))
+    f.close()
+        # if [x, y] == start:
+        #     break
+
+    # way.append(before[(x,y)])
     return way #guide to go from start to goal step by step
 
 
@@ -57,60 +69,22 @@ def main():
     way = []
     line = sys.stdin.readline()
     while (line != ''):
-        f = open("test1", "a")
-        f.write(line)
-        f.close()
         if 'HELLO' in line:
             sys.stdout.write("I AM IA\n\n")
-            sys.stdin.readline()
         if 'ARE' in line:
             sys.stdout.write("OK\n\n")
-            sys.stdin.readline()
         if 'MAZE' in line:
             maze = load_maze()
-            f = open("test", "w")
-            f.write(str(maze))
-            f.close()
             for x in range(len(maze)):
                 for y in range(len(maze[x])):
                     if maze[x][y] == 'A':
                         start = [x, y]
-                        f = open("test", "a")
-                        f.write(str(start))
-                        f.close()
-                # f = open("test", "a")
-                # f.write(str(start))
-                # f.close()
-    # way = bfs(maze, start, '!')
-    # f = open("test", "a")
-    # f.write(str(way))
-    # f.close()
-    # if len(way) > 0 and len(way) < 20:
-    #     move(way)
-    # else:
-            way = bfs(maze, start, 'o')
-            f = open("test", "a")
-            f.write(str(way))
+            f = open("test1", "w")
+            f.write(str(maze))
+            f.write(str(start))
             f.close()
-            move (way)
+            way = bfs(maze, start, 'o')
+            move(way)
         line = sys.stdin.readline()
-def test():
-    line = sys.stdin.readline()
-    f = open("test_line", "a")
-    f.write(line)
-    f.close
-    if 'HELLO' in line:
-        sys.stdout.write("I AM IA\n\n")
-        sys.stdin.readline()
-    line = sys.stdin.readline()
-    f = open("test_line", "a")
-    f.write(line)
-    f.close
-    if 'ARE' in line:
-        sys.stdout.write("OK\n\n")
-        sys.stdin.readline()
-    line = sys.stdin.readline()
-    f = open("test_line", "a")
-    f.write(line)
-    f.close
+
 main()
