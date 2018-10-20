@@ -34,6 +34,10 @@ def bfs(maze, start, enemy):
             if maze[x2][y2] not in enemy and (x2, y2) not in check:
                 queue.append(way + [(x2, y2)])
                 check.add((x2, y2))
+    (x, y) = start
+    for x2, y2 in ((x+1, y), (x-1, y), (x, y+1), (x, y-1)):
+        if maze[x2][y2] not in enemy:
+            return [start] + [(x2, y2)]
 
 
 def move(way):
