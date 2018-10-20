@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 import sys
+from time import sleep
+
+
 def load_maze():
     line = sys.stdin.readline().strip()
     maze = []
@@ -8,6 +11,7 @@ def load_maze():
         line = sys.stdin.readline().strip()
     return maze
 
+
 def find_enemy(maze, name):
     enemy = []
     for x in maze:
@@ -15,6 +19,8 @@ def find_enemy(maze, name):
             if y not in ['o', '!', ' ', '#', name]:
                 enemy.append(y)
     return enemy
+
+
 def bfs(maze, start, enemy):
     enemy.append('#')
     queue = [[start]]
@@ -60,4 +66,6 @@ def main():
             way = bfs(maze, start, enemy)
             move(way)
         line = sys.stdin.readline()
+
+
 main()
